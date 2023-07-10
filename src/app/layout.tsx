@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-    <body style={{padding: 16}}><LayoutClient>{children}</LayoutClient></body>
+    <body style={{padding: "8 16"}}><LayoutClient>{children}</LayoutClient></body>
     </html>
   )
 }

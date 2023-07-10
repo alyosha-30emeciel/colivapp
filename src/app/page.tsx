@@ -1,8 +1,11 @@
+import 'server-only'
 import React from 'react';
 import Client from "@/app/client";
 
+const url = process.env.DATA_ENDPOINT_URL!
+
 async function getData() {
-  const res = await fetch('https://hook.eu1.make.com/d8oc6ui87ysbgor5r5eoe9zucl6qfrte')
+  const res = await fetch(url, { next: { revalidate: 10 } })
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
