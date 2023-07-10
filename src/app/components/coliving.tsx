@@ -2,13 +2,13 @@ import {Table, Tag} from "antd";
 import Column from "antd/es/table/Column";
 import React from "react";
 
-import {CheckCircleOutlined, ExclamationCircleOutlined, SyncOutlined} from "@ant-design/icons";
+import {CheckCircleOutlined, ExclamationCircleOutlined, SyncOutlined, WarningOutlined} from "@ant-design/icons";
 import {format, parseISO, parseJSON} from "date-fns";
 import {fr} from "date-fns/locale";
 
 const date_formatter = (v:Date) => {
     try {
-        return format(v, 'PPPP', {locale: fr}) as string
+        return format(v, 'eee d MMM', {locale: fr}) as string
     }
     catch (e) {
         return ""
@@ -41,11 +41,23 @@ const status_formatter = (v: string, record: any) => {
     const {icon, t, color} =  res
     return <Tag icon={icon} color={color}>{t}</Tag>
 }
+
+const night_solde_formatter = (v: number) => <span>{v} {v < 0 && <WarningOutlined style={{color:"orange"}} />}</span>
+
+function BookingsTable(props: { dataSource: any }) {
+    return <Table dataSource={props.dataSource} bordered pagination={false} size="middle" rowKey="id">
+        <Column title="Statut" dataIndex="status" render={status_formatter} width="100px"/>
+        <Column title="Nom" dataIndex="name"/>
+        <Column title="Arrivée" dataIndex="arrival_date" render={date_formatter}/>
+        <Column title="Départ" dataIndex="departure_date" render={date_formatter}/>
+        <Column title="Solde nuits" dataIndex="nights_balance" render={night_solde_formatter} width="100px"/>
+    </Table>;
+}
+
 export default function Coliving(props: {data: any}) {
 
     const bookings = props.data.coliving.map((r: any) => ({
-        status: r.status,
-        name: r.name,
+        ...r,
         arrival_date: parseJSON(r.arrival_date),
         departure_date: parseJSON(r.departure_date),
     }))
@@ -54,18 +66,8 @@ export default function Coliving(props: {data: any}) {
     const future_bookings = bookings.filter((r: any) => r.arrival_date > today )
     return <>
         <h3>Réservations en cours</h3>
-        <Table dataSource={current_bookings} bordered pagination={false} size="middle" rowKey="id">
-            <Column title="Statut" dataIndex="status" render={status_formatter} width="80px"/>
-            <Column title="Nom" dataIndex="name"/>
-            <Column title="Arrivée" dataIndex="arrival_date" render={date_formatter} />
-            <Column title="Départ" dataIndex="departure_date" render={date_formatter} />
-        </Table>
+        <BookingsTable dataSource={current_bookings}/>
         <h3>Réservations à venir</h3>
-        <Table dataSource={future_bookings} bordered pagination={false} size="middle" rowKey="id">
-            <Column title="Statut" dataIndex="status" render={status_formatter} width="80px"/>
-            <Column title="Nom" dataIndex="name"/>
-            <Column title="Arrivée" dataIndex="arrival_date" render={date_formatter} />
-            <Column title="Départ" dataIndex="departure_date" render={date_formatter} />
-        </Table>
+        <BookingsTable dataSource={future_bookings}/>
     </>;
 }

@@ -33,8 +33,8 @@ export default function Client(props: {data: any}) {
             children: <CompteCourse data={props.data}/>
         },
         {
-            label: <span><CoffeeOutlined /> Colivers</span>,
-            key: "colivers",
+            label: <span><CoffeeOutlined /> Coliving</span>,
+            key: "coliving",
             children: <Coliving data={props.data}/>
         },
         {

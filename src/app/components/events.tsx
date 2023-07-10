@@ -17,10 +17,46 @@ const date_formatter = (v:string) => {
 
 }
 
+const waitTag = {
+    icon: <SyncOutlined spin/>,
+    t: "En attente",
+    color: "warning"
+}
+const confirmedTag = {
+    icon: <CheckCircleOutlined />,
+    t: "Confirmée",
+    color: "success"
+}
+
+const canceledTag = {
+    icon: <ExclamationCircleOutlined />,
+    t: "Refusée",
+    color: "danger"
+}
+
+const statusToTagProps = new Map<string, any>([
+    ["En attente d'info", waitTag],
+    ["En attente paiement", confirmedTag],
+    ["Payé", confirmedTag],
+    ["Réservé (payé à 50%)", confirmedTag],
+    ["Au %", confirmedTag],
+    ["Annulé", canceledTag]
+])
+
+const status_formatter = (v: string, record: any) => {
+    const res = statusToTagProps.get(v)
+    if (!res) {
+        return <Tag icon={<ExclamationCircleOutlined />} color="danger">Inconnue</Tag>
+    }
+    const {icon, t, color} =  res
+    return <Tag icon={icon} color={color}>{t}</Tag>
+}
+
 export default function Events(props: {data: any}) {
     return <>
         <h3>Prochains évenements</h3>
         <Table dataSource={props.data.events} bordered pagination={false} size="middle" rowKey="id">
+            <Column title="Statut" dataIndex="status" render={status_formatter} width="80px"/>
             <Column title="Nom" dataIndex="name"/>
             <Column title="Organisataire" dataIndex="organizer"/>
             <Column title="Début" dataIndex="start_date" render={date_formatter} />
