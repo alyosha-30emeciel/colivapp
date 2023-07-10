@@ -5,7 +5,7 @@ import Client from "@/app/client";
 const url = process.env.DATA_ENDPOINT_URL!
 
 async function getData() {
-  const res = await fetch(url, { next: { revalidate: 30 } })
+  const res = await fetch(url, { next: { revalidate: 60 } })
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 

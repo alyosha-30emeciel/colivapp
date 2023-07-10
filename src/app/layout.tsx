@@ -3,6 +3,7 @@ import './vars.css'
 import './globals.css'
 import type { Metadata } from 'next'
 import LayoutClient from "@/app/layout_client";
+import {Analytics} from "@vercel/analytics/dist/react";
 
 export const metadata: Metadata = {
   title: 'colivinfo',
@@ -16,7 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-    <body><LayoutClient>{children}</LayoutClient></body>
+    <body>
+    <LayoutClient>
+      {children}
+      <Analytics />
+    </LayoutClient>
+    </body>
     </html>
   )
 }
