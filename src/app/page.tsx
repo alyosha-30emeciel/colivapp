@@ -5,7 +5,7 @@ import Client from "@/app/client";
 const url = process.env.DATA_ENDPOINT_URL!
 
 async function getData() {
-  const res = await fetch(url, { next: { revalidate: 10 } })
+  const res = await fetch(url, { next: { revalidate: 30 } })
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -14,7 +14,6 @@ async function getData() {
     // This will activate the closest `error.js` Error Boundary
     throw new Error('Failed to fetch data')
   }
-
   return res.json()
 }
 
