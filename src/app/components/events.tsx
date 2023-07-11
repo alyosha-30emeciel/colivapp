@@ -2,7 +2,13 @@ import {Table, Tag} from "antd";
 import Column from "antd/es/table/Column";
 import React from "react";
 
-import {CheckCircleOutlined, ClockCircleOutlined, ExclamationCircleOutlined, SyncOutlined} from "@ant-design/icons";
+import {
+    CheckCircleOutlined,
+    ClockCircleOutlined,
+    ExclamationCircleOutlined,
+    ExportOutlined,
+    SyncOutlined
+} from "@ant-design/icons";
 import {format, parseISO} from "date-fns";
 import {fr} from "date-fns/locale";
 
@@ -53,11 +59,15 @@ const status_formatter = (v: string, record: any) => {
 }
 
 export default function Events(props: {data: any}) {
+    function name_render(v: string, record: any) {
+        return record.url ? <a target="_blank" href={record.url}>{v} <ExportOutlined /></a> : <>{v}</>
+    }
+
     return <>
         <h3>Prochains évenements</h3>
         <Table dataSource={props.data.events} bordered pagination={false} size="middle" rowKey="id">
             <Column title="Statut" dataIndex="status" render={status_formatter} width="80px"/>
-            <Column title="Nom" dataIndex="name"/>
+            <Column title="Nom" dataIndex="name" render={name_render}/>
             <Column title="Organisataire" dataIndex="organizer"/>
             <Column title="Début" dataIndex="start_date" render={date_formatter} />
             <Column title="Fin" dataIndex="end_date" render={date_formatter} />
