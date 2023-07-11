@@ -2,7 +2,7 @@ import {Table, Tag} from "antd";
 import Column from "antd/es/table/Column";
 import React from "react";
 
-import {CheckCircleOutlined, ExclamationCircleOutlined, SyncOutlined} from "@ant-design/icons";
+import {CheckCircleOutlined, ClockCircleOutlined, ExclamationCircleOutlined, SyncOutlined} from "@ant-design/icons";
 import {format, parseISO} from "date-fns";
 import {fr} from "date-fns/locale";
 
@@ -18,7 +18,7 @@ const date_formatter = (v:string) => {
 }
 
 const waitTag = {
-    icon: <SyncOutlined spin/>,
+    icon: <ClockCircleOutlined />,
     t: "En attente",
     color: "warning"
 }

@@ -4,7 +4,7 @@ import React from "react";
 
 import {
     CheckCircleOutlined,
-    ExclamationCircleOutlined,
+    ExclamationCircleOutlined, QuestionCircleOutlined,
     SyncOutlined,
     TrophyOutlined,
     WarningOutlined
@@ -23,7 +23,7 @@ const date_formatter = (v:Date) => {
 }
 const statusToTagProps = new Map<string, any>([
     ["Paiement en attente", {
-        icon: <SyncOutlined spin />,
+        icon: <QuestionCircleOutlined />,
         t: "En attente",
         color: "warning"
     }],
@@ -58,6 +58,7 @@ function BookingsTable(props: { dataSource: any }) {
     return <Table dataSource={props.dataSource} bordered pagination={false} size="middle" rowKey="id">
         <Column title="Statut" dataIndex="status" render={status_formatter} width="100px"/>
         <Column title="Nom" dataIndex="name" render={name_formatter}/>
+        <Column title="Invité par" dataIndex="invited_by"/>
         <Column title="Arrivée" dataIndex="arrival_date" render={date_formatter}/>
         <Column title="Départ" dataIndex="departure_date" render={date_formatter}/>
         <Column title="Solde nuits" dataIndex="nights_balance" render={night_solde_formatter} width="100px"/>
