@@ -2,8 +2,14 @@ import {Table, Tag} from "antd";
 import Column from "antd/es/table/Column";
 import React from "react";
 
-import {CheckCircleOutlined, ExclamationCircleOutlined, SyncOutlined, WarningOutlined} from "@ant-design/icons";
-import {format, parseISO, parseJSON} from "date-fns";
+import {
+    CheckCircleOutlined,
+    ExclamationCircleOutlined,
+    SyncOutlined,
+    TrophyOutlined,
+    WarningOutlined
+} from "@ant-design/icons";
+import {format, parseJSON} from "date-fns";
 import {fr} from "date-fns/locale";
 
 const date_formatter = (v:Date) => {
@@ -33,7 +39,7 @@ const statusToTagProps = new Map<string, any>([
     }]
 ])
 
-const status_formatter = (v: string, record: any) => {
+const status_formatter = (v: string) => {
     const res = statusToTagProps.get(v)
     if (!res) {
         return <Tag icon={<ExclamationCircleOutlined />} color="danger">Inconnue</Tag>
@@ -44,10 +50,14 @@ const status_formatter = (v: string, record: any) => {
 
 const night_solde_formatter = (v: number) => <span>{v} {v < 0 && <WarningOutlined style={{color:"orange"}} />}</span>
 
+const name_formatter = (v:string, record:any) => {
+    return <>{v}{record.no_seva_option && <> <Tag color="gold" icon={<TrophyOutlined />}>SANS Sevā</Tag></>}</>
+}
+
 function BookingsTable(props: { dataSource: any }) {
     return <Table dataSource={props.dataSource} bordered pagination={false} size="middle" rowKey="id">
         <Column title="Statut" dataIndex="status" render={status_formatter} width="100px"/>
-        <Column title="Nom" dataIndex="name"/>
+        <Column title="Nom" dataIndex="name" render={name_formatter}/>
         <Column title="Arrivée" dataIndex="arrival_date" render={date_formatter}/>
         <Column title="Départ" dataIndex="departure_date" render={date_formatter}/>
         <Column title="Solde nuits" dataIndex="nights_balance" render={night_solde_formatter} width="100px"/>
