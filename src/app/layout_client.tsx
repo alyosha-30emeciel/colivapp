@@ -63,7 +63,7 @@ export default function LayoutClient({
                         mode="horizontal"
                         items={items}
                         selectedKeys={[pathname]}
-                        onClick={({item, key}) => {
+                        onClick={({key}) => {
                             router.push(key)
                         }}
                         />
