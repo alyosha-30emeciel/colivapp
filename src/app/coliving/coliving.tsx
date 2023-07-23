@@ -1,4 +1,4 @@
-import {Table, Tag} from "antd";
+import {Space, Table, Tag} from "antd";
 import Column from "antd/es/table/Column";
 import React from "react";
 
@@ -54,15 +54,18 @@ const name_formatter = (v:string, record:any) => {
     return <>{v}{record.no_seva_option && <> <Tag color="gold" icon={<TrophyOutlined />}>SANS Sevā</Tag></>}</>
 }
 
-function BookingsTable(props: { dataSource: any }) {
-    return <Table dataSource={props.dataSource} bordered pagination={false} size="middle" rowKey="id">
+function BookingsTable(props: { title: string, dataSource: any }) {
+    return <>
+        <h3>{props.title}</h3>
+        <Table dataSource={props.dataSource} bordered pagination={false} size="middle" rowKey="id">
         <Column title="Statut" dataIndex="status" render={status_formatter} width="100px"/>
         <Column title="Nom" dataIndex="name" render={name_formatter}/>
         <Column title="Invité par" dataIndex="invited_by"/>
         <Column title="Arrivée" dataIndex="arrival_date" render={date_formatter}/>
         <Column title="Départ" dataIndex="departure_date" render={date_formatter}/>
         <Column title="Solde nuits" dataIndex="nights_balance" render={night_solde_formatter} width="100px"/>
-    </Table>;
+    </Table>
+        </>
 }
 
 export default function Coliving(props: {data: any}) {
@@ -76,9 +79,7 @@ export default function Coliving(props: {data: any}) {
     const current_bookings = bookings.filter((r: any) => r.arrival_date <= today )
     const future_bookings = bookings.filter((r: any) => r.arrival_date > today )
     return <>
-        <h3>Réservations en cours</h3>
-        <BookingsTable dataSource={current_bookings}/>
-        <h3>Réservations à venir</h3>
-        <BookingsTable dataSource={future_bookings}/>
-    </>;
+        <BookingsTable title="Réservations en cours" dataSource={current_bookings}/>
+        <BookingsTable title="Réservations à venir" dataSource={future_bookings}/>
+    </>
 }

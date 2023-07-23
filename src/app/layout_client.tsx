@@ -17,7 +17,7 @@ export default function LayoutClient({
 
     const items: MenuProps['items'] = [
         {
-            label: 'Home',
+            label: 'Maison',
             key: '/',
             icon: <HomeOutlined />,
         },
@@ -71,7 +71,7 @@ export default function LayoutClient({
                     </Row>
                 </Header>
 
-                <Content style={{ padding: '8px 20px' }}>
+                <Content style={{ padding: '4px 4px' }}>
         {children}
                 </Content>
                 <Footer></Footer>

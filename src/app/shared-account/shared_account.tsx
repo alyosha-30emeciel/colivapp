@@ -38,7 +38,7 @@ const status_formatter = (v: string) => {
 const attachment_render = (v: string, record: any) => {
     return record.needs_attachment ? <Tag icon={<FileExclamationOutlined />} color="warning">Manquant</Tag> : <Tag icon={<FileProtectOutlined />} color="success">OK</Tag>
 }
-export default function CompteCourse(props: {data: any}) {
+export default function SharedAccount(props: {data: any}) {
 
 
     return <>

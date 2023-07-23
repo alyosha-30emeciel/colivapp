@@ -18,9 +18,9 @@ const long_date_formatter = (v: string) => {
 export default function Client(props: {data: any}) {
 
   return <>
-        <Coliving data={props.data} />
+      <Coliving data={props.data} />
       <div style={{ textAlign: 'center' }}>Dernière mise à jour des données : {long_date_formatter(props.data.ts)}</div>
-
   </>
+
 
 }

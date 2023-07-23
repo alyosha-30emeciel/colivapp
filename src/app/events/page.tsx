@@ -1,4 +1,4 @@
-import {getData} from "@/app/data";
+import {getData} from "@/app/components/data";
 import Client from "./client";
 
 export default async function Page() {

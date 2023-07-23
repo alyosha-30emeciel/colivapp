@@ -1,12 +1,10 @@
 import 'server-only'
-import './vars.css'
-import './globals.css'
 import type { Metadata } from 'next'
 import LayoutClient from "@/app/layout_client";
 import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
-  title: 'colivinfo',
+  title: 'Coliv\'Info',
   description: '',
 }
 
@@ -17,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-    <body>
+    <body style={{margin: 0, padding: 0}}>
     <LayoutClient>
       {children}
       <Analytics />
