@@ -4,7 +4,7 @@ import Image from "next/image";
 import logoImage from "@/app/logo3.png";
 import React from "react";
 import {Content, Footer, Header} from "antd/es/layout/layout";
-import {CalendarOutlined, CoffeeOutlined, CreditCardOutlined, LinkOutlined, MailOutlined} from "@ant-design/icons";
+import {CalendarOutlined, CoffeeOutlined, CreditCardOutlined, HomeOutlined, LinkOutlined} from "@ant-design/icons";
 import {usePathname, useRouter} from 'next/navigation'
 
 
@@ -19,7 +19,7 @@ export default function LayoutClient({
         {
             label: 'Home',
             key: '/',
-            icon: <MailOutlined />,
+            icon: <HomeOutlined />,
         },
         {
             label: 'Coliving',
