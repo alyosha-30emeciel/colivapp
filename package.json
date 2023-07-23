@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
+    "@syncfusion/ej2": "^22.1.39",
+    "@syncfusion/ej2-react-schedule": "^22.1.38",
     "@vercel/analytics": "^1.0.1",
     "antd": "5.7.2",
+    "cldr-data": "^36.0.1",
     "date-fns": "^2.30.0",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",

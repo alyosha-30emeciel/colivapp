@@ -4,7 +4,6 @@ import {format, parseJSON} from 'date-fns'
 import {fr} from "date-fns/locale";
 import Coliving from "@/app/coliving/coliving";
 
-
 const long_date_formatter = (v: string) => {
     try {
         const d = parseJSON(v)
