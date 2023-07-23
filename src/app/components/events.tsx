@@ -11,6 +11,7 @@ import {
 } from "@ant-design/icons";
 import {format, parseISO} from "date-fns";
 import {fr} from "date-fns/locale";
+import ExternalLink from "@/app/components/externalLink";
 
 const date_formatter = (v:string) => {
     try {
@@ -60,7 +61,7 @@ const status_formatter = (v: string, record: any) => {
 
 export default function Events(props: {data: any}) {
     function name_render(v: string, record: any) {
-        return record.url ? <a target="_blank" href={record.url}>{v} <ExportOutlined /></a> : <>{v}</>
+        return record.url ? <ExternalLink href={record.url} title={v}/> :<>{v}</>
     }
 
     return <>
