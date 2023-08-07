@@ -9,23 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.1.4",
-    "@syncfusion/ej2": "^22.1.39",
-    "@syncfusion/ej2-react-schedule": "^22.1.38",
+    "@ant-design/icons": "^5.2.5",
+    "@syncfusion/ej2": "^22.2.7",
+    "@syncfusion/ej2-react-schedule": "^22.2.5",
     "@vercel/analytics": "^1.0.1",
-    "antd": "5.7.2",
+    "antd": "5.8.2",
     "cldr-data": "^36.0.1",
     "date-fns": "^2.30.0",
-    "eslint": "8.45.0",
-    "eslint-config-next": "13.4.12",
-    "next": "13.4.12",
+    "eslint": "8.46.0",
+    "eslint-config-next": "13.4.13",
+    "next": "13.4.13",
     "react": "18.2.0",
     "react-countup": "^6.4.2",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@types/node": "20.4.4",
-    "@types/react": "18.2.15",
+    "@types/node": "20.4.8",
+    "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
     "typescript": "5.1.6"
   }
