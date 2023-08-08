@@ -1,11 +1,14 @@
 "use client"
-import {Col, ConfigProvider, Layout, Menu, MenuProps, Row} from "antd";
+import {Col, ConfigProvider, Layout, Menu, MenuProps, Row, Skeleton, Spin} from "antd";
 import Image from "next/image";
 import logoImage from "@/app/logo3.png";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Content, Footer, Header} from "antd/es/layout/layout";
 import {CalendarOutlined, CoffeeOutlined, CreditCardOutlined, HomeOutlined, LinkOutlined} from "@ant-design/icons";
 import {usePathname, useRouter} from 'next/navigation'
+import {Auth0Provider} from "@auth0/auth0-react";
+import UserMenuButton from "@/app/user_menu_button";
+import MoreUserInfoProvider from "@/app/components/more_user_info_provider";
 
 
 export default function LayoutClient({
@@ -17,7 +20,7 @@ export default function LayoutClient({
 
     const items: MenuProps['items'] = [
         {
-            label: 'Maison',
+            label: 'Accueil',
             key: '/',
             icon: <HomeOutlined />,
         },
@@ -46,8 +49,19 @@ export default function LayoutClient({
     ];
     const router = useRouter()
     const pathname = usePathname()
-
-    return <>
+    const [origin, setOrigin] = useState<string|undefined>()
+    useEffect(() => {
+        setOrigin(window.location.origin)
+    }, [])
+    return <>{!origin ? <Skeleton active={true} />:
+        <Auth0Provider
+            domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN!}
+            clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID!}
+            authorizationParams={{
+                redirect_uri: origin,
+            }}
+        >
+            <MoreUserInfoProvider>
         <ConfigProvider
             theme={{ token: {  borderRadius: 6,
                 colorPrimary: '#b217ff' } }}>
@@ -68,6 +82,9 @@ export default function LayoutClient({
                         }}
                         />
                         </Col>
+                        <Col>
+                            <UserMenuButton />
+                        </Col>
                     </Row>
                 </Header>
 
@@ -77,5 +94,7 @@ export default function LayoutClient({
                 <Footer></Footer>
             </Layout>
     </ConfigProvider>
+            </MoreUserInfoProvider>
+        </Auth0Provider>}
     </>
 }
